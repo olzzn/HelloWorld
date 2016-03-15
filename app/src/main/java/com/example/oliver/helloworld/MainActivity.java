@@ -1,5 +1,6 @@
 package com.example.oliver.helloworld;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,8 +9,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Switch blackSwitch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,15 +27,29 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.rootLayout);
+
+        blackSwitch = (Switch) findViewById(R.id.switch1);
+        blackSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+
+                if (isChecked) {
+                    relativeLayout.setBackgroundColor(Color.GRAY);
+                } else {
+                    relativeLayout.setBackgroundColor(Color.WHITE);
+                }
+
             }
         });
+
+
+
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
